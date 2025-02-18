@@ -1,0 +1,117 @@
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Check } from "lucide-react";
+import axios from "axios";
+import { getUtm } from "@/hooks/use-utm";
+import { useTranslation } from "react-i18next"; // <-- добавил хук
+
+const phoneSchema = z.object({
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .max(20, "Phone number is too long")
+    .regex(/^\+?[0-9]+$/, "Only numbers and + are allowed"),
+});
+
+type FormData = z.infer<typeof phoneSchema>;
+
+interface ContactFormDialogProps {
+  children: React.ReactNode;
+  buttonName: string;
+}
+
+export function ContactFormDialog({ children, buttonName }: ContactFormDialogProps) {
+  const { t } = useTranslation(); // <-- добавил вызов хука
+  
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const form = useForm<FormData>({
+    resolver: zodResolver(phoneSchema),
+    defaultValues: {
+      phone: "",
+    },
+  });
+
+  const onSubmit = async (data: FormData) => {
+    const utm_data = getUtm();
+    const body = {
+      phone: data.phone,
+      utm: "Main landing",
+      button: buttonName,
+      utm_campaign: utm_data.utm_campaign,
+      utm_source: utm_data.utm_source,
+    };
+
+    axios.post("https://uae.app.salescout.me/api/profile/contact-me", body, {
+      headers: { "Content-Type": "application/json" },
+    });
+
+    console.log("Phone number submitted:", data.phone);
+    setIsSuccess(true);
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    console.log("isOpen", open, buttonName);
+    setIsOpen(open);
+    if (!open) {
+      setIsSuccess(false);
+      form.reset();
+    }
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent>
+        {!isSuccess ? (
+          <>
+            <DialogHeader>
+              <DialogTitle>{t("Getintouch")}</DialogTitle> {/* <-- добавил t() */}
+            </DialogHeader>
+            <p className="text-muted-foreground">{t("Shareyourphonenumber")}</p>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="+1234567890" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full">
+                  {t("Submit")} {/* <-- добавил t() */}
+                </Button>
+              </form>
+            </Form>
+          </>
+        ) : (
+          <div className="py-6 text-center">
+            <div className="mx-auto w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-4">
+              <Check className="w-6 h-6 text-green-600" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">{t("Thankyou")}</h3>
+            <p className="text-muted-foreground">{t("viaWhatsApp")}</p>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
