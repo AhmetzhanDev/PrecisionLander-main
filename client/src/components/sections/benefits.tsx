@@ -64,8 +64,8 @@ export default function Benefits() {
 
         {/* Кнопки для смены языка */}
         <div className="mt-4 text-center">
-          <button onClick={() => i18n.changeLanguage("en")}>English</button>
-          <button onClick={() => i18n.changeLanguage("tr")}>Türkçe</button>
+          <button onClick={() => i18n.changeLanguage("en")}></button>
+          <button onClick={() => i18n.changeLanguage("tr")}></button>
         </div>
       </div>
     </section>

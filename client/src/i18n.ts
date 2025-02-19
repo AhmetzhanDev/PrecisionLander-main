@@ -156,7 +156,7 @@ i18n
           HWjustfollow:"Kayıt sürecini takip etmeniz yeterli",
           HWConnect:"Bağlamak",
 
-          HWConnectyourstorer:"Mağazanızı öğlen/carrefour'da SaleScout'a bağlayın",
+          HWConnectyourstorer:"Mağazanızı SaleScout'a bağlayın",
           HWSetminmaxprices:"Minimum maksimum fiyatları ayarla",
 
           HWProvideminandmaxprices:"Marjınızı korumak amacıyla her SKU için minimum ve maksimum fiyatları sağlayın",

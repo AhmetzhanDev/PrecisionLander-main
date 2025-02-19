@@ -61,7 +61,7 @@ export default function Hero() {
                     left: i18n.language === "en" ? "-20px" : "40px",
                   }}
                 >
-                  EN
+                  TR
                 </span>
                 <span
                   className={`absolute w-full h-full text-center text-xl font-semibold ${i18n.language === "tr" ? "opacity-100" : "opacity-0"}`}
@@ -69,7 +69,7 @@ export default function Hero() {
                     left: i18n.language === "tr" ? "15px" : "-40px",
                   }}
                 >
-                  TR
+                  EN
                 </span>
               </div>
             </button>
@@ -138,7 +138,7 @@ export default function Hero() {
           </div>
 
           {/* Desktop Image */}
-          <div className="flex flex-1 justify-center"> {/* Убираем `hidden md:flex` */}
+          <div className="flex flex-1 justify-center">
   <div className="md:w-[280px] lg:w-[360px] transition-transform duration-300 hover:scale-105">
     <img src="foto.png" alt="Hero Image" className="w-full h-auto object-cover" />
   </div>

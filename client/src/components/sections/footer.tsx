@@ -36,17 +36,17 @@ export default function Footer() {
           </div>
 
           {/* Social Media */}
-          <div>
-            <h3 className="font-semibold mb-4">{t("SocialMedia")}</h3> {/* Перевод строки */}
-            <div className="flex space-x-4">
-              <a href="https://www.facebook.com/people/UAESaleScoutme/61568159456611/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a href="https://www.instagram.com/uae.salescout.me/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                <Instagram className="h-6 w-6" />
-              </a>
-            </div>
-          </div>
+          {/* <div> */}
+            {/* <h3 className="font-semibold mb-4">{t("SocialMedia")}</h3> Перевод строки */}
+            {/* <div className="flex space-x-4"> */}
+              {/* <a href="https://www.facebook.com/people/UAESaleScoutme/61568159456611/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"> */}
+                {/* <Facebook className="h-6 w-6" /> */}
+              {/* </a> */}
+              {/* <a href="https://www.instagram.com/uae.salescout.me/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary"> */}
+                {/* <Instagram className="h-6 w-6" /> */}
+              {/* </a> */}
+            {/* </div> */}
+          {/* </div> */}
         </div>
 
         <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
